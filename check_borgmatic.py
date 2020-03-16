@@ -17,7 +17,7 @@ import argparse
 # default crit, warn
 warn_sec = 86400 # 1 day
 crit_sec = 86400*3 # 3 days
-# the following settings must fit with your suders entry:
+# the following settings must fit with your sudoers entry:
 borgmatic_bin = "sudo borgmatic"
 borgmatic_parameters = "--list --successful --last 1 --json"
 
