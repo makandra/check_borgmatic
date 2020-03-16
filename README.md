@@ -36,7 +36,7 @@ Here are some examples to integrate this plugin into your Icinga2 environment:
             vars.bogmatic_critical = 5d
     }
 
-`vim conf.d/services.conf` (you have to customize the following)
+`vim /etc/icinga2/conf.d/services.conf` (you have to customize the following)
 
     apply Service "Linux-Borgmatic" {
         check_command = "check_borgmatic"
