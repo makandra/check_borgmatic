@@ -40,8 +40,12 @@ if args.warning:
   warn_sec = int(args.warning)
 
 # Plugin start
-# Get Data
-output = subprocess.check_output(borgmatic_bin+" "+borgmatic_parameters, shell=True)
+# Try to get Data from borgmatic 
+try:
+  output = subprocess.check_output(borgmatic_bin+" "+borgmatic_parameters, shell=True)
+except:
+  print("UNKOWN - can not get data from borgmatic!")
+  sys.exit(3)
 output_string = output.decode('utf-8') # Decode using utf-8 encoding
 data = json.loads(output_string) # load json
 
