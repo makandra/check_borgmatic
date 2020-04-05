@@ -58,18 +58,18 @@ time_now = datetime.datetime.now()
 
 # calculate delta
 time_past = time_now - last_backup_time
-time_past_sec = time_past.total_seconds()
+time_past_sec = round(time_past.total_seconds())
 
 # Check data: seconds
 if time_past_sec < warn_sec:
-  print("OK - last borgmatic backup: %s (age: %s) with name %s" % (last_backup_time, time_past, last_backup_name))  
+  print("OK - last borgmatic backup: %s (age: %s) with name %s | 'lastbackup_s'=%s" % (last_backup_time, time_past, last_backup_name, time_past_sec))  
   sys.exit(0)
 elif time_past_sec > warn_sec and time_past_sec < crit_sec:
-  print("WARNING - last borgmatic backup: %s (age: %s) with name %s" % (last_backup_time, time_past, last_backup_name))  
+  print("WARNING - last borgmatic backup: %s (age: %s) with name %s | 'lastbackup_s'=%s" % (last_backup_time, time_past, last_backup_name, time_past_sec))  
   sys.exit(1)
 elif time_past_sec > crit_sec:
-  print("CRITICAL - last borgmatic backup: %s (age: %s) with name %s" % (last_backup_time, time_past, last_backup_name))   
+  print("CRITICAL - last borgmatic backup: %s (age: %s) with name %s | 'lastbackup_s'=%s" % (last_backup_time, time_past, last_backup_name, time_past_sec))   
   sys.exit(2)
 else:
-  print("UNKOWN - last borgmatic backup: %s (age: %s) with name %s" % (last_backup_time, time_past, last_backup_name))
+  print("UNKOWN - last borgmatic backup: %s (age: %s) with name %s | 'lastbackup_s'=%s" % (last_backup_time, time_past, last_backup_name, time_past_sec))
   sys.exit(3)
