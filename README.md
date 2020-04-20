@@ -1,5 +1,9 @@
 # Nagios/Icinga2 Plugin: check_borgmatic 
-Python3 plugin for borgmatic to check the last successful backup
+Python3 plugin for borgmatic to check the last successful backup.
+```
+$ /usr/lib64/nagios/plugins/check_borgmatic/check_borgmatic.py -w 86400 -c 172800
+OK - last borgmatic backup: 2020-04-20 01:58:12 (age: 18:13:22.123227) with name www-2020-04-20T01:58:09 | 'lastbackup_s'=65602
+```
 
 # Requirements: 
 - sudo installed: `apt install sudo` 
