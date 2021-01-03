@@ -46,8 +46,17 @@ try:
 except:
   print("UNKOWN - can not get data from borgmatic!")
   sys.exit(3)
-output_string = output.decode('utf-8') # Decode using utf-8 encoding
-data = json.loads(output_string) # load json
+
+try:
+  output_string = output.decode('utf-8') # Decode using utf-8 encoding
+  data = json.loads(output_string) # load json
+except:
+  print("UNKOWN - can decode borgmatic data!")
+  sys.exit(3)
+ 
+if not data[0]['archives']:
+  print("CRITICAL - no successful backup found!")
+  sys.exit(2)
 
 last_backup_name = data[0]['archives'][0]['name'] 
 last_backup_time_str = data[0]['archives'][0]['time']
