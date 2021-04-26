@@ -7,6 +7,7 @@ OK - last borgmatic backup: 2020-04-20 01:58:12 (age: 18:13:22.123227) with name
 
 # Requirements: 
 - sudo installed: `apt install sudo` 
+- of course a running borgmatic-setup 
 
 # Install
 ## manually  
@@ -55,4 +56,4 @@ Here are some examples to integrate this plugin into your Icinga2 environment:
     }
 
 # Developers 
-Please feel free to customize this. Thank you :) 
+Please feel free to customize this. Send pull-requests. Thank you :) 
