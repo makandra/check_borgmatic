@@ -24,6 +24,7 @@ parser = argparse.ArgumentParser(description='nagios/icinga2 plugin for borgmati
 parser.add_argument("-V", "--version", help="show program version", action="store_true")
 parser.add_argument("-c", "--critical", type=int, metavar='seconds', help="critical time since last backup (in seconds)")
 parser.add_argument("-w", "--warning", type=int, metavar='seconds', help="warning time since last backup (in seconds)")
+parser.add_argument("-C", "--config", help="path to configuration file")
 # read arguments from the cmd line
 args = parser.parse_args()
 # check for --version
@@ -36,6 +37,9 @@ if args.critical:
 # check for --warning
 if args.warning:
   warn_sec = int(args.warning)
+
+if args.config:
+    command.append("--config " + args.config)
 
 # Plugin start
 # Try to get Data from borgmatic 
