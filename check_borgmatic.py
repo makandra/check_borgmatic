@@ -18,7 +18,7 @@ import argparse
 warn_sec = 86400 # 1 day
 crit_sec = 86400*3 # 3 days
 # the following settings must fit with your sudoers entry:
-command = ["sudo", "borgmatic", "--list", "--successful", "--last 1", "--json"]
+command = ["sudo", "borgmatic", "--list", "--last 1", "--json"]
 # init the parser
 parser = argparse.ArgumentParser(description='nagios/icinga2 plugin for borgmatic to check the last successful backup.')
 parser.add_argument("-V", "--version", help="show program version", action="store_true")
@@ -26,6 +26,7 @@ parser.add_argument("-c", "--critical", type=int, metavar='seconds', help="criti
 parser.add_argument("-w", "--warning", type=int, metavar='seconds', help="warning time since last backup (in seconds)")
 parser.add_argument("-C", "--config", help="path to configuration file")
 parser.add_argument("-d", "--debug", default=False, action='store_true')
+parser.add_argument("-p", "--prefix")
 # read arguments from the cmd line
 args = parser.parse_args()
 # check for --version
@@ -41,6 +42,11 @@ if args.warning:
 
 if args.config:
   command.append("--config " + args.config)
+
+if args.prefix:
+  command.append("--prefix " + args.prefix)
+else:
+  command.append("--successful")
 
 # Plugin start
 # Try to get Data from borgmatic 
