@@ -5,7 +5,7 @@
 # ./check_borgmatic.py -c <seconds> -w <seconds>
 #
 
-version = "0.1"
+version = "0.2"
 
 # Imports
 import subprocess
