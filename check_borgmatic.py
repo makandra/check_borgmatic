@@ -1,7 +1,7 @@
 #!/usr/bin/python3
-# 
+#
 # Python3 Nagios/Icinga2 plugin for borgmatic to check the last successful backup
-# 
+#
 # ./check_borgmatic.py -c <seconds> -w <seconds>
 #
 
@@ -49,7 +49,7 @@ else:
   command.append("--successful")
 
 # Plugin start
-# Try to get Data from borgmatic 
+# Try to get Data from borgmatic
 try:
   output = subprocess.check_output(" ".join(command), shell=True)
 except:
@@ -71,7 +71,7 @@ if not data[0]['archives']:
   print("CRITICAL - no successful backup found!")
   sys.exit(2)
 
-last_backup_name = data[0]['archives'][0]['name'] 
+last_backup_name = data[0]['archives'][0]['name']
 last_backup_time_str = data[0]['archives'][0]['time']
 
 last_backup_time = datetime.datetime.strptime(last_backup_time_str, '%Y-%m-%dT%H:%M:%S.%f')
@@ -84,13 +84,13 @@ time_past_sec = round(time_past.total_seconds())
 
 # Check data: seconds
 if time_past_sec < warn_sec:
-  print("OK - last borgmatic backup: %s (age: %s) with name %s | 'lastbackup_s'=%s" % (last_backup_time, time_past, last_backup_name, time_past_sec))  
+  print("OK - last borgmatic backup: %s (age: %s) with name %s | 'lastbackup_s'=%s" % (last_backup_time, time_past, last_backup_name, time_past_sec))
   sys.exit(0)
 elif time_past_sec > warn_sec and time_past_sec < crit_sec:
-  print("WARNING - last borgmatic backup: %s (age: %s) with name %s | 'lastbackup_s'=%s" % (last_backup_time, time_past, last_backup_name, time_past_sec))  
+  print("WARNING - last borgmatic backup: %s (age: %s) with name %s | 'lastbackup_s'=%s" % (last_backup_time, time_past, last_backup_name, time_past_sec))
   sys.exit(1)
 elif time_past_sec > crit_sec:
-  print("CRITICAL - last borgmatic backup: %s (age: %s) with name %s | 'lastbackup_s'=%s" % (last_backup_time, time_past, last_backup_name, time_past_sec))   
+  print("CRITICAL - last borgmatic backup: %s (age: %s) with name %s | 'lastbackup_s'=%s" % (last_backup_time, time_past, last_backup_name, time_past_sec))
   sys.exit(2)
 else:
   print("UNKOWN - last borgmatic backup: %s (age: %s) with name %s | 'lastbackup_s'=%s" % (last_backup_time, time_past, last_backup_name, time_past_sec))
