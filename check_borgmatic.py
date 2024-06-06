@@ -18,9 +18,7 @@ import argparse
 warn_sec = 86400 # 1 day
 crit_sec = 86400*3 # 3 days
 # the following settings must fit with your sudoers entry:
-borgmatic_bin = "sudo borgmatic"
-borgmatic_parameters = "--list --successful --last 1 --json"
-
+command = ["sudo", "borgmatic", "--list", "--successful", "--last 1", "--json"]
 # init the parser
 parser = argparse.ArgumentParser(description='nagios/icinga2 plugin for borgmatic to check the last successful backup.')
 parser.add_argument("-V", "--version", help="show program version", action="store_true")
@@ -42,7 +40,7 @@ if args.warning:
 # Plugin start
 # Try to get Data from borgmatic 
 try:
-  output = subprocess.check_output(borgmatic_bin+" "+borgmatic_parameters, shell=True)
+  output = subprocess.check_output(" ".join(command), shell=True)
 except:
   print("UNKOWN - can not get data from borgmatic!")
   sys.exit(3)
