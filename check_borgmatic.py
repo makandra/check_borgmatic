@@ -40,7 +40,7 @@ if args.warning:
   warn_sec = int(args.warning)
 
 if args.config:
-    command.append("--config " + args.config)
+  command.append("--config " + args.config)
 
 # Plugin start
 # Try to get Data from borgmatic 
