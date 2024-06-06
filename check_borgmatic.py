@@ -25,6 +25,7 @@ parser.add_argument("-V", "--version", help="show program version", action="stor
 parser.add_argument("-c", "--critical", type=int, metavar='seconds', help="critical time since last backup (in seconds)")
 parser.add_argument("-w", "--warning", type=int, metavar='seconds', help="warning time since last backup (in seconds)")
 parser.add_argument("-C", "--config", help="path to configuration file")
+parser.add_argument("-d", "--debug", default=False, action='store_true')
 # read arguments from the cmd line
 args = parser.parse_args()
 # check for --version
@@ -55,7 +56,11 @@ try:
 except:
   print("UNKOWN - can decode borgmatic data!")
   sys.exit(3)
- 
+
+if args.debug:
+  from pprint import pp
+  pp(data)
+
 if not data[0]['archives']:
   print("CRITICAL - no successful backup found!")
   sys.exit(2)
