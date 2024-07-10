@@ -48,6 +48,8 @@ if args.prefix:
 else:
   command.append("--successful")
 
+command.append("--log-file /dev/null")
+
 # Plugin start
 # Try to get Data from borgmatic
 try:
