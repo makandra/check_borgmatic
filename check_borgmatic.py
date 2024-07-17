@@ -18,7 +18,7 @@ import argparse
 warn_sec = 86400 # 1 day
 crit_sec = 86400*3 # 3 days
 # the following settings must fit with your sudoers entry:
-command = ["sudo", "borgmatic", "--list", "--last 1", "--json"]
+command = ["sudo", "borgmatic", "list", "--last 1", "--json"]
 # init the parser
 parser = argparse.ArgumentParser(description='nagios/icinga2 plugin for borgmatic to check the last successful backup.')
 parser.add_argument("-V", "--version", help="show program version", action="store_true")
