@@ -20,10 +20,9 @@ warn_sec = 86400 # 1 day
 crit_sec = 86400*3 # 3 days
 # the following settings must fit with your sudoers entry:
 command_default = ["sudo", "borgmatic", "list", "--last 1", "--json"]
-command_borgmatic = ["sudo","borgmatic", "-nc" ] # -nc ensures no ANSI codes in the JSON
+command_borgmatic = ["sudo","HOME=foo borgmatic", "-nc" ] # -nc ensures no ANSI codes in the JSON
 command_borg = ["borg", "list", "--last 1", "--json", "--bypass-lock"]
 # We need to overwrite HOME to avoid running into the local locked cache
-env = os.environ.copy()
 
 # init the parser
 parser = argparse.ArgumentParser(description='nagios/icinga2 plugin for borgmatic to check the last successful backup.')
@@ -63,7 +62,6 @@ append_parameter("--log-file /dev/null")
 # Try to get Data from borgmatic
 if args.bypass_lock:
   command = command_borgmatic + command_borg
-  env['HOME'] = 'foo'
 else:
   command = command_default
 
