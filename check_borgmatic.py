@@ -5,7 +5,7 @@
 # ./check_borgmatic.py -c <seconds> -w <seconds>
 #
 
-version = "0.5"
+version = "0.6"
 
 # Imports
 import subprocess
@@ -55,7 +55,8 @@ if args.config:
   append_parameter("--config " + args.config)
 
 if args.prefix:
-  append_parameter("--prefix " + args.prefix)
+  command_default.append("--prefix " + args.prefix)
+  command_borg.append("--prefix " + args.prefix)
 
 append_parameter("--log-file /dev/null")
 
