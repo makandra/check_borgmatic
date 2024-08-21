@@ -45,8 +45,6 @@ if args.config:
 
 if args.prefix:
   command.append("--prefix " + args.prefix)
-else:
-  command.append("--successful")
 
 command.append("--log-file /dev/null")
 
