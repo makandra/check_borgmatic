@@ -53,14 +53,14 @@ command.append("--log-file /dev/null")
 try:
   output = subprocess.check_output(" ".join(command), shell=True)
 except:
-  print("UNKOWN - can not get data from borgmatic!")
+  print("UNKNOWN - cannot get data from borgmatic!")
   sys.exit(3)
 
 try:
   output_string = output.decode('utf-8') # Decode using utf-8 encoding
   data = json.loads(output_string) # load json
 except:
-  print("UNKOWN - can decode borgmatic data!")
+  print("UNKNOWN - cannot decode borgmatic data!")
   sys.exit(3)
 
 if args.debug:
