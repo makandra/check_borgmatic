@@ -4,16 +4,14 @@
 #
 # ./check_borgmatic.py -c <seconds> -w <seconds>
 #
-
-version = "0.7"
-
 # Imports
 import subprocess
 import json
 import datetime
 import sys
 import argparse
-import os
+
+version = "0.7"
 
 # default crit, warn
 warn_sec = 86400 # 1 day
@@ -78,7 +76,7 @@ try:
 
   if args.debug:
     print("command used:", " ".join(command) + "\n")
-    print("stdout:\n"+result.stdout +"\n")
+    print("stdout:\n" + result.stdout + "\n")
     if result.stderr:
         print("stderr:\n" + result.stderr + "\n")
 except Exception as e:
