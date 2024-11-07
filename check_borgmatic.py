@@ -75,14 +75,20 @@ try:
                         check=True # returns an exception if the command errorcode isn't 0
                         )
   output = result.stdout
-except:
-  print("UNKNOWN - cannot get data from borgmatic!")
+
+  if args.debug:
+    print("command used:", " ".join(command) + "\n")
+    print("stdout:\n"+result.stdout +"\n")
+    if result.stderr:
+        print("stderr:\n" + result.stderr + "\n")
+except Exception as e:
+  print("UNKNOWN - cannot get data from borgmatic! Error:", e)
   sys.exit(3)
 
 try:
   data = json.loads(output) if isinstance(json.loads(output), list) else [json.loads(output)] # load json
-except:
-  print("UNKNOWN - cannot decode borgmatic data!")
+except Exception as e:
+  print("UNKNOWN - cannot decode json data! Error:", e)
   sys.exit(3)
 
 if args.debug:
