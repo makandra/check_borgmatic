@@ -4,16 +4,14 @@
 #
 # ./check_borgmatic.py -c <seconds> -w <seconds>
 #
-
-version = "0.6"
-
 # Imports
 import subprocess
 import json
 import datetime
 import sys
 import argparse
-import os
+
+version = "0.7"
 
 # default crit, warn
 warn_sec = 86400 # 1 day
@@ -67,16 +65,28 @@ else:
   command = command_default
 
 try:
-  output = subprocess.check_output(" ".join(command), shell=True)
-except:
-  print("UNKNOWN - cannot get data from borgmatic!")
+  result = subprocess.run(
+                        " ".join(command),
+                        capture_output=True,
+                        text=True,
+                        shell=True,
+                        check=True # returns an exception if the command errorcode isn't 0
+                        )
+  output = result.stdout
+
+  if args.debug:
+    print("command used:", " ".join(command) + "\n")
+    print("stdout:\n" + result.stdout + "\n")
+    if result.stderr:
+        print("stderr:\n" + result.stderr + "\n")
+except Exception as e:
+  print("UNKNOWN - cannot get data from borgmatic! Error:", e)
   sys.exit(3)
 
 try:
-  output_string = output.decode('utf-8') # Decode using utf-8 encoding
-  data = json.loads(output_string) if isinstance(json.loads(output_string), list) else [json.loads(output_string)] # load json
-except:
-  print("UNKNOWN - cannot decode borgmatic data!")
+  data = json.loads(output) if isinstance(json.loads(output), list) else [json.loads(output)] # load json
+except Exception as e:
+  print("UNKNOWN - cannot decode json data! Error:", e)
   sys.exit(3)
 
 if args.debug:
