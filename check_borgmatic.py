@@ -11,7 +11,7 @@ import datetime
 import sys
 import argparse
 
-version = "0.7"
+version = "0.8"
 
 # default crit, warn
 warn_sec = 86400 # 1 day
