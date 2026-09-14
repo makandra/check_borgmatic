@@ -11,14 +11,14 @@ import datetime
 import sys
 import argparse
 
-version = "0.8"
+version = "0.9"
 
 # default crit, warn
 warn_sec = 86400 # 1 day
 crit_sec = 86400*3 # 3 days
 # the following settings must fit with your sudoers entry:
 command_default = ["sudo", "borgmatic", "list", "--last 1", "--json"]
-command_borgmatic = ["sudo","HOME=foo borgmatic", "-nc" ] # -nc ensures no ANSI codes in the JSON
+command_borgmatic = ["sudo","HOME=foo borgmatic"]
 command_borg = ["borg", "list", "--last 1", "--json", "--bypass-lock"]
 # We need to overwrite HOME to avoid running into the local locked cache
 
@@ -52,8 +52,8 @@ if args.config:
   append_parameter("--config " + args.config)
 
 if args.prefix:
-  command_default.append("--prefix " + args.prefix)
-  command_borg.append("--prefix " + args.prefix)
+    command_default.append("--glob-archives '" + args.prefix + "*'")
+    command_borg.append("--glob-archives '" + args.prefix + "*'")
 
 append_parameter("--log-file /dev/null")
 
